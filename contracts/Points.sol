@@ -58,6 +58,9 @@ contract Points {
         RPointsBalance[_to] -= _amount * MILLION;
     }
 
+    /**
+     * Setting the market address
+     */
     function setMarket(address _market) public onlyAdministrator {
         market = _market;
     }

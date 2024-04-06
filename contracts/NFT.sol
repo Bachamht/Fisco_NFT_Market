@@ -11,7 +11,9 @@ contract NFT {
     string public _name;
     string public _symbol;
     address private administrator;
+    address private market;
     uint256 private nounce;
+    
 
     mapping(uint256 tokenId => address) private _owners;
     mapping(address owner => uint256) private _balances;
@@ -23,12 +25,19 @@ contract NFT {
     error NFTInvalidReceiver(address receiver);
     error NFTIncorrectOwner(address owner, uint256 tokenId, address previousOwner);
     error NFTInvalidSender(address sender);
+    error NotMarket(address market);
+
 
     event Transfer(address indexed from, address indexed to, uint256 indexed tokenId);
     event MetadataUpdate(uint256 indexed tokenId);
 
     modifier onlyAdministrator{
         if (msg.sender !=  administrator) revert NotAdministrator(msg.sender);
+        _;
+    }
+
+    modifier onlyMarket{
+        if (msg.sender !=  market) revert NotMarket(msg.sender);
         _;
     }
 
@@ -75,14 +84,6 @@ contract NFT {
         return bytes(baseURI).length > 0 ? string.concat(baseURI, tokenId.toString()) : "";
     }
 
-    /**
-     * @dev Base URI for computing {tokenURI}. If set, the resulting URI for each
-     * token will be the concatenation of the `baseURI` and the `tokenId`. Empty
-     * by default, can be overridden in child contracts.
-     */
-    function _baseURI() internal view virtual returns (string memory) {
-        return "";
-    }
 
     /**
      * mint NFT
@@ -109,7 +110,7 @@ contract NFT {
      *
      * Emits a {Transfer} event.
      */
-    function transferFrom(address from, address to, uint256 tokenId) public virtual {
+    function transferFrom(address from, address to, uint256 tokenId) public onlyMarket{
         if (to == address(0)) {
             revert NFTInvalidReceiver(address(0));
         }
@@ -119,9 +120,26 @@ contract NFT {
         }
     }
 
+    /**
+     * Setting the market address
+     */
+    function setMarket(address _market) public onlyAdministrator {
+        market = _market;
+    }
+
                      /*«-«-«-«-«-«-«-«-«-«-«-«-«-«-«-«-«-«-«-«-«-«-«-«-«-«-«-«-«-«-*/
                      /*                  INTERNAL FUNCTIONS                         */
                      /*-»-»-»-»-»-»-»-»-»-»-»-»-»-»-»-»-»-»-»-»-»-»-»-»-»-»-»-»-»-»*/
+    
+    /**
+     * @dev Base URI for computing {tokenURI}. If set, the resulting URI for each
+     * token will be the concatenation of the `baseURI` and the `tokenId`. Empty
+     * by default, can be overridden in child contracts.
+     */
+    function _baseURI() internal view virtual returns (string memory) {
+        return "";
+    }
+
 
     /**
      * @dev Returns the owner of the `tokenId`. Does NOT revert if token doesn't exist
@@ -131,6 +149,7 @@ contract NFT {
      * consistent with ownership. The invariant to preserve is that for any address `a` the value returned by
      * `balanceOf(a)` must be equal to the number of tokens such that `_ownerOf(tokenId)` is `a`.
      */
+    
     function _ownerOf(uint256 tokenId) internal view virtual returns (address) {
         return _owners[tokenId];
     }

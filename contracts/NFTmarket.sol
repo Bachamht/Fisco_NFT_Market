@@ -127,7 +127,7 @@ contract NFTMarket {
     /**
      * View NFT's owner
      */
-    function viewOwner(uint256 tokenID) public  returns(address) {
+    function viewOwner(uint256 tokenID) public returns(address) {
         return INFT(nftAddr).ownerOf(tokenID);
     }
 
@@ -152,7 +152,7 @@ contract NFTMarket {
      * Sellers do not need to list NFT
      * Buyers can directly purchase NFTs with the signature of the seller
      */
-   function buyWithSignature(uint256 tokenID,uint amount,  bytes memory _signature) public {
+   function buyWithSignature(uint256 tokenID, uint amount, bytes memory _signature) public {
         require(permitSignature(tokenID, amount,  _signature), "No Permission");
         address seller = INFT(nftAddr).ownerOf(tokenID);
         uint256 txfeeNeed = (amount * fee * MILLION) / THOUSAND;
