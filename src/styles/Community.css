@@ -1,0 +1,17 @@
+/* styles/Explore.css */
+#community {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  #list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px; /* 调整卡片之间的间隔 */
+  }
+  
+  .card-item {
+    width: 100%; /* 使卡片宽度适应容器 */
+    max-width: 100%; /* 可选，确保卡片不会超过容器宽度 */
+    flex: 1; /* 可选，使卡片在空间不足时能够平均分配空间 */
+  }
