@@ -1,0 +1,33 @@
+#card-list{
+    /* border:1px solid blue; */
+    display:flex;
+    flex-wrap: wrap;
+    align-items:center;
+    justify-content: space-around;;
+    width: 80vw;
+    margin-bottom: 100px;
+}
+
+.rec .rec-dot {
+    box-shadow: 0 0 1px 2px rgb(0 0 0 / 50%) !important;
+    background-color: white !important;
+}
+
+.rec .rec-dot_active {
+    box-shadow: 0 0 1px 2px rgb(0 0 0 / 50%) !important;
+    background-color: rgb(112, 44, 228) !important;
+}
+
+.rec .rec-arrow {
+    color: white;
+}
+.card {
+    flex: 0 1 calc(33.333% - 20px); /* 每行3个卡片，减去间隔 */
+    margin: 10px; /* 根据需要调整间隔 */
+    box-sizing: border-box; /* 确保宽度包含边距和内边距 */
+  }
+@media (max-width: 510px) {
+    #card-list {
+        width: 100%;
+    }
+}
