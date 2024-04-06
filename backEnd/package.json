@@ -1,0 +1,16 @@
+{
+  "name": "backEnd",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "nodejs-sdk": "git+https://github.com/FISCO-BCOS/nodejs-sdk.git#master"
+  }
+}
