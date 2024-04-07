@@ -20,7 +20,6 @@ export default function App() {
       <input type="text" id="item" value={items} onChange={(e)=>setItems(e.target.value)}/>
     </div>
 
-
     <button>Add</button>
   </form>
 
