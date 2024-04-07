@@ -1,49 +1,72 @@
-import React, { useState, useEffect, createRef } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
-import { useNavigate } from "react-router-dom";
-import { useLocation, Navigate } from "react-router";
+import { useLocation } from "react-router-dom";
 import Card from "../components/base/Card";
 import "../styles/NFTDetail.css";
 import { ColorExtractor } from "react-color-extractor";
 import Button from "../components/base/Button";
 import { FaEthereum } from "react-icons/fa";
-import { AiOutlineHeart, AiFillHeart, AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { useMobile } from "../hooks/isMobile";
-import { hotDropsData } from "../constants/MockupData";
-import NFTCard from "../components/NFTCard";
 import { useARStatus } from "../hooks/isARStatus";
-
-
+import { useNavigate } from "react-router-dom";
 
 const NFTDetail = () => {
+  const [paymentResult, setPaymentResult] = useState(null);
+  const [isPurchaseSuccessModalVisible, setIsPurchaseSuccessModalVisible] = useState(false);
   const isMobile = useMobile();
-
   const [colors, setColors] = useState([]);
-
   const [isLike, setIsLike] = useState(false);
-  
-  
+  const navigate = useNavigate();
+  const { state } = useLocation();
 
   const like = () => setIsLike(!isLike);
-
-  const getColors = (colors) => {
-    setColors((c) => [...c, ...colors]);
+  const getColors = (extractedColors) => {
+    setColors((c) => [...c, ...extractedColors]);
   };
 
-  const navigate = useNavigate();
+  const handlePurchaseClick = async () => {
+    try {
+      const result = 1; // Replace with await buyNFT(state.item.tokenId);
+      if (result) {
+        setPaymentResult("购买成功");
+        setIsPurchaseSuccessModalVisible(true);
+      } else {
+        setPaymentResult("购买失败，余额不足或其他原因");
+      }
+    } catch (error) {
+      setPaymentResult("购买失败，发生错误");
+    }
+  };
 
-  const { state } = useLocation();
+  const modalStyle = {
+    display: isPurchaseSuccessModalVisible ? "block" : "none",
+    position: "fixed",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: "300px", // 设置弹窗的宽度
+    height: "150px", // 设置弹窗的高度
+    backgroundColor: "white",
+    padding: "20px",
+    border: "1px solid #ccc",
+    borderRadius: "10px",
+    zIndex: "10000",
+    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.3)", // 添加阴影效果
+    opacity: 0.7, // 设置弹窗的透明度
+    transition: "opacity 0.3s ease", // 添加透明度变化的过渡效果
+  };
+
+  const handleCloseModal = () => {
+    setIsPurchaseSuccessModalVisible(false);
+    setPaymentResult(null);
+  };
 
   useEffect(() => {
     setColors([]);
   }, [state]);
 
   const isARSupport = useARStatus(state.item.src);
-
-  
-
-  //!! aciklama karakter sayisi sinirlanmali.
-  //!! scroll sorununa cozum bulunmali.
 
   return (
     <div>
@@ -54,32 +77,41 @@ const NFTDetail = () => {
           height={isMobile ? "700px" : "60vh"}
           blurColor={colors[0]}
           child={
-            //Detail Content
             <div id="detail-content">
-             {isARSupport ? <model-viewer ar-scale="auto" ar ar-modes="webxr scene-viewer quick-look" id="arDetail" loading="eager" camera-controls auto-rotate src={state.item.src} > </model-viewer> 
-             : <> <ColorExtractor getColors={getColors}>
-                <img id="detail-image" src={state.item.src} />
-              </ColorExtractor></>}
-
-              <div id="detail-info" style={{}}>
-                <div id='detail-info-container'>
-                  <p id="collection"> {state.item.name} </p>
-                  <p id="name"> {state.item.name} </p>
-                  <p id="description" > {state.item.description} </p>
-
+              {isARSupport ? (
+                <model-viewer
+                  ar-scale="auto"
+                  ar
+                  ar-modes="webxr scene-viewer quick-look"
+                  id="arDetail"
+                  loading="eager"
+                  camera-controls
+                  auto-rotate
+                  src={state.item.src}
+                />
+              ) : (
+                <ColorExtractor getColors={getColors}>
+                  <img id="detail-image" src={state.item.src} />
+                </ColorExtractor>
+              )}
+              <div id="detail-info">
+                <div id="detail-info-container">
+                  <p id="collection">{state.item.name}</p>
+                  <p id="name">{state.item.name}</p>
+                  <p id="description">{state.item.description}</p>
                 </div>
-
                 <div id="detail-controls">
                   <Button
                     width={isMobile ? "70%" : "70%"}
                     height="50px"
+                    onClick={handlePurchaseClick}
                     child={
                       <div id="button-child">
                         <FaEthereum size="28px" />
                         <p id="price">1254</p>
                       </div>
                     }
-                  ></Button>
+                  />
                   <div className="like-container">
                     <button className="like" onClick={like}>
                       {!isLike ? (
@@ -88,11 +120,7 @@ const NFTDetail = () => {
                         <AiFillHeart
                           size="45"
                           style={{
-                            stroke: `-webkit-linear-gradient(
-                    to bottom,
-                    #38ef7d,
-                    #11998e
-                  );`,
+                            stroke: "linear-gradient(to bottom, #38ef7d, #11998e)",
                           }}
                           color="#00f5c966"
                         />
@@ -105,9 +133,13 @@ const NFTDetail = () => {
             </div>
           }
         />
-        
+        {isPurchaseSuccessModalVisible && (
+          <div style={modalStyle}>
+            <p>购买成功，可在个人账户中查看</p>
+            <button onClick={handleCloseModal}>关闭</button>
+          </div>
+        )}
       </div>
-
     </div>
   );
 };

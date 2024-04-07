@@ -4,6 +4,9 @@ import { exploreList } from "../constants/MockupData";
 import '../styles/Explore.css';
 import Header from "../components/Header";
 import Search from "../components/Search";
+
+
+
 const Explore = () => {
   return (
     <div id="explore">

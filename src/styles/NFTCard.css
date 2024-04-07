@@ -183,3 +183,50 @@ model-modelviewerelement{
     width:240px;
     height:170px;
 }
+.popup {
+    position: fixed; /* 固定定位，使弹窗覆盖在页面上方 */
+    top: 50%; /* 垂直居中 */
+    left: 50%; /* 水平居中 */
+    transform: translate(-50%, -50%); /* 通过变换保证弹窗完全居中 */
+    width: 80%; /* 弹窗宽度，可根据需要调整 */
+    max-width: 400px; /* 弹窗最大宽度，防止在小屏幕上过于拥挤 */
+    background-color: white; /* 弹窗背景颜色 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 弹窗阴影效果 */
+    border-radius: 8px; /* 弹窗边角圆角 */
+    padding: 20px; /* 弹窗内边距 */
+    z-index: 1000; /* 弹窗层级，确保弹窗显示在最上层 */
+    display: none; /* 默认不显示弹窗 */
+  }
+  
+  /* 弹窗显示时的动画效果 */
+  .popup.show {
+    display: block; /* 显示弹窗 */
+    animation: fadeIn 0.3s ease; /* 淡入动画 */
+  }
+  
+  /* 动画关键帧，定义淡入效果 */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  /* 弹窗内文本样式 */
+  .popup p {
+    margin: 0; /* 移除默认外边距 */
+    font-size: 16px; /* 文本字体大小 */
+    line-height: 1.5; /* 文本行高 */
+    text-align: center; /* 文本居中对齐 */
+  }
+  
+  /* 根据弹窗内容的不同，可以添加不同的类名来改变样式 */
+  .popup.success {
+    border-left: 5px solid #38ef7d; /* 成功提示的边框颜色 */
+  }
+  
+  .popup.error {
+    border-left: 5px solid #ff3860; /* 错误提示的边框颜色 */
+  }

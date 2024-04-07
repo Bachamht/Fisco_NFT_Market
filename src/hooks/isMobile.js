@@ -7,8 +7,6 @@ export const getWindowDim = () => {
       height:window.innerHeight,
     };
   };
-
-
 export const useMobile = () => {
   const [isMobile, setIsMobile] = useState(false);
 
@@ -21,7 +19,6 @@ export const useMobile = () => {
 
   useEffect(() => {
     handleResize();
-
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize");
   }, []);
