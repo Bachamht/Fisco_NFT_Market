@@ -4,11 +4,6 @@ Configuration.setConfig(path.join(__dirname, args.config));
 const Web3jService = require('./nodejs-sdk/packages/api').Web3jService;
 let web3jService = new Web3jService();
 
-web3jService.getBlockNumber().then(blockNumber => {
-    console.log(blockNumber)
-});
-
-
 // 获取某个地址拥有的 NFT 数量
 web3jService.call('NFTContractAddress', 'balanceOf', [ownerAddress]).then(result => {
     console.log('NFT Balance:', result.output);
