@@ -13,8 +13,8 @@ let web3jService = new Web3jService(configuration);
                      /*«-«-«-«-«-«-«-«-«-«-«-«-«-«-«-«-«-«-«-«-«-«-«-«-«-«-«-«-«-«-*/
                      /*                    NFT Contract API                        */
                      /*-»-»-»-»-»-»-»-»-»-»-»-»-»-»-»-»-»-»-»-»-»-»-»-»-»-»-»-»-»-»*/
-
-app.get("/", async (req, res) => {
+//测试节点是否正常连接
+app.get("/getblockNumber", async (req, res) => {
     try {
         // 调用 getBlockNumber 方法获取当前块高
         const result = await web3jService.getBlockNumber();

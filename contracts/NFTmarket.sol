@@ -3,8 +3,7 @@
 pragma solidity ^0.8.0;
 
 
-import {ECDSA} from "../utils/ECSDA.sol";
-import "../utils/IERC721.sol";
+import {ECDSA} from "./utils/ECDSA.sol";
 
 interface INFT {
         function transferFrom(address from, address to, uint256 tokenId) external;
@@ -48,7 +47,7 @@ contract NFTMarket {
     mapping(uint256 => bool) isListed;
 
     modifier OnlyOwner(uint256 tokenID){
-        address nftOwner = IERC721(nftAddr).ownerOf(tokenID);
+        address nftOwner = INFT(nftAddr).ownerOf(tokenID);
         if (msg.sender != nftOwner) revert NotOwner(msg.sender, tokenID);
         _;
     }
@@ -112,7 +111,7 @@ contract NFTMarket {
         address seller = INFT(nftAddr).ownerOf(tokenID);
         uint256 txfeeNeed = amount * MILLION * fee / THOUSAND;
         IPoint(pointPool).withdrawTPoints(msg.sender, amount + txfeeNeed);
-        Ipoint(pointPool).addTPoints(msg.sender, seller, amount);
+        IPoint(pointPool).addTPoints(seller, amount);
         INFT(nftAddr).transferFrom(seller, msg.sender, tokenID) ;
         emit BuySuccess(msg.sender, tokenID);
     }
@@ -142,7 +141,7 @@ contract NFTMarket {
         address seller = INFT(nftAddr).ownerOf(tokenID);
         uint256 txfeeNeed = (amount * fee * MILLION) / THOUSAND;
         IPoint(pointPool).withdrawTPoints(msg.sender, amount + txfeeNeed);
-        Ipoint(pointPool).addTPoints(msg.sender, seller, amount);
+        IPoint(pointPool).addTPoints(seller, amount);
         INFT(nftAddr).transferFrom(seller, msg.sender, tokenID) ;
         emit BuySuccess(msg.sender, tokenID);
     }
@@ -157,7 +156,7 @@ contract NFTMarket {
         address seller = INFT(nftAddr).ownerOf(tokenID);
         uint256 txfeeNeed = (amount * fee * MILLION) / THOUSAND;
         IPoint(pointPool).withdrawTPoints(msg.sender, amount + txfeeNeed);
-        Ipoint(pointPool).addTPoints(msg.sender, seller, amount);
+        IPoint(pointPool).addTPoints(seller, amount);
         INFT(nftAddr).transferFrom(seller, msg.sender, tokenID) ;
         emit BuySuccess(msg.sender, tokenID);
    }

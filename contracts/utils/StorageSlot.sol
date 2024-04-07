@@ -2,7 +2,7 @@
 // OpenZeppelin Contracts (last updated v5.0.0) (utils/StorageSlot.sol)
 // This file was procedurally generated from scripts/generate/templates/StorageSlot.js.
 
-pragma solidity ^0.8.24;
+pragma solidity ^0.8.0;
 
 /**
  * @dev Library for reading and writing primitive types to specific storage slots.
@@ -227,104 +227,5 @@ library StorageSlot {
     function asInt256(bytes32 slot) internal pure returns (Int256SlotType) {
         return Int256SlotType.wrap(slot);
     }
-
-    /**
-     * @dev Load the value held at location `slot` in transient storage.
-     */
-    function tload(AddressSlotType slot) internal view returns (address value) {
-        /// @solidity memory-safe-assembly
-        assembly {
-            value := tload(slot)
-        }
-    }
-
-    /**
-     * @dev Store `value` at location `slot` in transient storage.
-     */
-    function tstore(AddressSlotType slot, address value) internal {
-        /// @solidity memory-safe-assembly
-        assembly {
-            tstore(slot, value)
-        }
-    }
-
-    /**
-     * @dev Load the value held at location `slot` in transient storage.
-     */
-    function tload(BooleanSlotType slot) internal view returns (bool value) {
-        /// @solidity memory-safe-assembly
-        assembly {
-            value := tload(slot)
-        }
-    }
-
-    /**
-     * @dev Store `value` at location `slot` in transient storage.
-     */
-    function tstore(BooleanSlotType slot, bool value) internal {
-        /// @solidity memory-safe-assembly
-        assembly {
-            tstore(slot, value)
-        }
-    }
-
-    /**
-     * @dev Load the value held at location `slot` in transient storage.
-     */
-    function tload(Bytes32SlotType slot) internal view returns (bytes32 value) {
-        /// @solidity memory-safe-assembly
-        assembly {
-            value := tload(slot)
-        }
-    }
-
-    /**
-     * @dev Store `value` at location `slot` in transient storage.
-     */
-    function tstore(Bytes32SlotType slot, bytes32 value) internal {
-        /// @solidity memory-safe-assembly
-        assembly {
-            tstore(slot, value)
-        }
-    }
-
-    /**
-     * @dev Load the value held at location `slot` in transient storage.
-     */
-    function tload(Uint256SlotType slot) internal view returns (uint256 value) {
-        /// @solidity memory-safe-assembly
-        assembly {
-            value := tload(slot)
-        }
-    }
-
-    /**
-     * @dev Store `value` at location `slot` in transient storage.
-     */
-    function tstore(Uint256SlotType slot, uint256 value) internal {
-        /// @solidity memory-safe-assembly
-        assembly {
-            tstore(slot, value)
-        }
-    }
-
-    /**
-     * @dev Load the value held at location `slot` in transient storage.
-     */
-    function tload(Int256SlotType slot) internal view returns (int256 value) {
-        /// @solidity memory-safe-assembly
-        assembly {
-            value := tload(slot)
-        }
-    }
-
-    /**
-     * @dev Store `value` at location `slot` in transient storage.
-     */
-    function tstore(Int256SlotType slot, int256 value) internal {
-        /// @solidity memory-safe-assembly
-        assembly {
-            tstore(slot, value)
-        }
-    }
+    
 }

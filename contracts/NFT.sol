@@ -3,7 +3,7 @@
 
 pragma solidity ^0.8.0;
 
-import {Strings} from "../utils/Strings.sol";
+import {Strings} from "./utils/Strings.sol";
 
 contract NFT {
     using Strings for uint256;
@@ -114,7 +114,7 @@ contract NFT {
         if (to == address(0)) {
             revert NFTInvalidReceiver(address(0));
         }
-        address previousOwner = _update(to, tokenId, _msgSender());
+        address previousOwner = _update(to, tokenId, msg.sender);
         if (previousOwner != from) {
             revert NFTIncorrectOwner(from, tokenId, previousOwner);
         }
