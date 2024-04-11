@@ -76,8 +76,8 @@ const TCDetail = () => {
                     height="50px"
                     child={
                       <div id="button-child">
-                        <FaEthereum size="28px" />
-                        <p id="price">1254</p>
+                
+                        <p id="price">投稿</p>
                       </div>
                     }
                   ></Button>

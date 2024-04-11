@@ -1,29 +1,39 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #f7f7f7;
+  background-color: #c1c3c7;
   margin: 0;
   padding: 0;
+  background-color: transparent !important;
 }
 
 header {
-  background-color: #007bff;
+  background-color: #c1c3c7;
   padding: 1rem;
   text-align: center;
   color: white;
+  width: 98%;
 }
 
 .upload-form-container {
-  max-width: 600px;
-  margin: 40px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 20px); /* 减去可能的页面边距 */
+  padding: 10px;
+  max-width: 66.66%; /* 页面宽度的2/3 */
+  margin: auto;
+  background-color: transparent;
+  border-radius: 8px;
+  position: relative;
+}
+
+.upload-form {
+  width: 100%;
   padding: 20px;
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
-
-.upload-form {
-  display: flex;
-  flex-direction: column;
 }
 
 .form-group {
@@ -37,20 +47,25 @@ header {
 
 .form-group input[type="text"],
 .form-group textarea {
-  width: 100%;
+  width: 99%;
   padding: 10px;
-  border: 1px solid #ddd;
+  border: 1px solid #f7f6f6;
   border-radius: 4px;
 }
 
 .form-group input[type="file"] {
-  width: 100%;
+  width: 99%;
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
 
 button[type="submit"] {
+  position: "absolute";
+  right: "20px";
+  bottom: "20px";
+  padding: "10px 20px";
+    margin: "10px 0 0";
   padding: 10px 20px;
   background-color: #007bff;
   color: white;
@@ -58,8 +73,17 @@ button[type="submit"] {
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  justify-content: center;
 }
+
+
 
 button[type="submit"]:hover {
   background-color: darken(#007bff, 10%);
+
+}
+
+textarea{
+  width: 99%;
+  height: 200px;
 }

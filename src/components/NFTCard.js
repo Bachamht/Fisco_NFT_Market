@@ -10,17 +10,20 @@ import { Colors } from "../constants/Colors";
 import { ModelViewerElement } from "@google/model-viewer";
 import { useARStatus } from "../hooks/isARStatus";
 
-const NFTCard = ({ username, nftName, price, nftSrc, likeCount, gradient, onClick }) => {
+const NFTCard = ({ username, owner,nftName,name, price, nftSrc, ilikeCount, gradient, onClick }) => {
   const [isLike, setIsLike] = useState(false);
   const [colors, setColors] = useState([]);
-
+  const [likeCount, setLikeCount] = useState(ilikeCount);
   const isARSupport = useARStatus(nftSrc);
 
   useEffect(() => {
     console.log(isARSupport);
   }, [])
 
-  const like = () => setIsLike(!isLike);
+  const like = () => {
+    setIsLike(!isLike); // 
+    setLikeCount(likeCount + 1); // 
+  };
 
   const getColors = colors => {
     setColors(c => [...c, ...colors]);
@@ -37,12 +40,12 @@ const NFTCard = ({ username, nftName, price, nftSrc, likeCount, gradient, onClic
         </ColorExtractor></>}
         <div className="wrapper">
           <div className="info-container">
-            <p className="owner"> LEJOURN.DARK.NFT</p>
-            <p className="name">Alien Cry</p>
+            <p className="owner"> {owner}</p>
+            <p className="name">{name}</p>
           </div>
 
           <div className="price-container">
-            <p className="price-label">Price</p>
+            <p className="price-label">价格</p>
             <p className="price">
               {" "}
               <FaEthereum /> 4.555
@@ -51,7 +54,7 @@ const NFTCard = ({ username, nftName, price, nftSrc, likeCount, gradient, onClic
         </div>
         <div className="buttons">
           {/* <button className="buy-now">Buy Now</button> */}
-          <Button color={Colors.buttons.primary} textContent="Buy Now" onClick={onClick} />
+          <Button color={Colors.buttons.primary} textContent="查看详情" onClick={onClick} />
           <div className="like-container">
             <button className="like" onClick={like}>
               {!isLike ? (

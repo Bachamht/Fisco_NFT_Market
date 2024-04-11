@@ -19,12 +19,12 @@ const Hero = () => {
     <div id="hero">
       {/* <img id='hero-background' src={list[0].src}/> */}
       <Header />
-      <h1 id="header-text-first"> NFT </h1>
-      <h1 id="header-text-second"> Darkroom Marketplace</h1>
-      <h5 id="header-subtext">Craft, hunt and trade NFT's in the dark</h5>
+      <h1 id="header-text-first">爱心数藏坊 </h1>
+      <h1 id="header-text-second"> 致力于教育公益和非遗保护的数字藏品交易平台</h1>
+      <h5 id="header-subtext">激发创意，传承文化，支持未来</h5>
       <div id="hero-buttons">
-        <button id="explore" onClick={goExplore}>Explore</button>
-        <button id="create" onClick={goCreate}>Create</button>
+        <button id="explore" onClick={goExplore}>开始探索</button>
+        <button id="create" onClick={goCreate}>开始创作</button>
       </div>
     </div>
   );
