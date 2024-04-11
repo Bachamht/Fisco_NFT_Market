@@ -11,6 +11,7 @@ const CardList = ({ list }) => {
       {list.map((item, index) => (
         <NFTCard
           nftSrc={item.src}
+          name={item.name}
           key={index}
           onClick={() => navigate("/detail", { state: { item: item } })}
           style={{ width: "100%", height: "100%" }}

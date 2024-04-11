@@ -9,7 +9,7 @@ const Home = () => {
     <div id="home">
       <Hero list={hotDropsData} />
 
-      <p id="card-list-header-text"> Hot Drops </p>
+      <p id="card-list-header-text"> 热门作品 </p>
       <div id="list-container">
         <CardList list={hotDropsData} />
       </div>

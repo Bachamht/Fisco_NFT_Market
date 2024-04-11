@@ -24,12 +24,11 @@ const Header = () => {
 
         <div id="link-containers">
 
-          <a>Start Hunting</a>
-          <a>Dark NFTs</a>
-          <a onClick={goCommunity}>Community</a> 
-          <a>Craft NFT</a>
+          <a>作品广场</a>
+          <a onClick={goCommunity}>非遗社区</a> 
+          <a>我的创作</a>
 
-          <button id="connect-wallet" onClick={handleWallet} >{!account ? 'Connect Wallet' : account}</button>
+          <button id="connect-wallet" onClick={handleWallet} >{!account ? '登录/注册' : account}</button>
         </div>
       </div>
     );
